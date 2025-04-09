@@ -1,0 +1,9 @@
+{
+  "name": "stripe-webhook-handler",
+  "version": "1.0.0",
+  "description": "Stripe webhook handler for AWS Lambda",
+  "main": "stripeWebhook.js",
+  "dependencies": {
+    "stripe": "^12.0.0"
+  }
+} 
