@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';
-import { Product } from '../types.ts';
+import { Product } from '../types';
 
 interface ProductCardProps {
   product: Product;

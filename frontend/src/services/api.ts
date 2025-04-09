@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Product, User, CartItem, Order, ApiResponse } from '../types.ts';
+import { Product, User, CartItem, Order } from '../types.ts';
 
 // Define AuthResponse since it's not in the types.ts file
 interface AuthResponse {
