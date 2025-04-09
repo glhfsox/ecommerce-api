@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { Product, User, CartItem, Order, AuthResponse } from '../types';
+import { Product, User, CartItem, Order, ApiResponse } from '../types.ts';
+
+// Define AuthResponse since it's not in the types.ts file
+interface AuthResponse {
+  user: User;
+  token: string;
+}
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 

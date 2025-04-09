@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';
-import { Product } from '../types';
+import { Product } from '../types.ts';
 
 interface ProductCardProps {
   product: Product;
@@ -29,7 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             ${product.price.toFixed(2)}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Stock: {product.stock}
+            Stock: {product.stockQuantity}
           </Typography>
         </Box>
       </CardContent>
@@ -37,10 +37,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <Button
           variant="contained"
           fullWidth
-          onClick={() => onAddToCart(product.id)}
-          disabled={product.stock === 0}
+          onClick={() => onAddToCart(product._id)}
+          disabled={product.stockQuantity === 0}
         >
-          {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+          {product.stockQuantity === 0 ? 'Out of Stock' : 'Add to Cart'}
         </Button>
       </Box>
     </Card>
