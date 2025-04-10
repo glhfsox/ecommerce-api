@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import CheckoutPage from './components/CheckoutPage';
 import CartPage from './components/CartPage';
 import OrderHistory from './components/OrderHistory';
+import ProductList from './components/ProductList';
 import { CartProvider } from './context/CartContext';
 
 // Create a theme instance
@@ -28,8 +29,8 @@ const App: React.FC = () => {
         <Router>
           <Layout>
             <Routes>
-              <Route path="/" element={<div>Home Page</div>} />
-              <Route path="/products" element={<div>Products Page</div>} />
+              <Route path="/" element={<div>Welcome to the E-commerce Store!</div>} />
+              <Route path="/products" element={<ProductList />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/orders" element={<OrderHistory />} />
