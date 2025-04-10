@@ -1,0 +1,7 @@
+{
+  "env": {
+    "VITE_API_URL": "https://your-api-url.vercel.app",
+    "VITE_STRIPE_PUBLIC_KEY": "pk_test_51RC2zX2a6Pp0pVsQdxh9yeppttxo2D45j4Dm34BjzXIHroCVq62PJgvaXNtTLXBMAaysUeUsisYJ3D96d5vCajKK00oR3ru2aK",
+    "NODE_ENV": "production"
+  }
+} 

@@ -1,11 +1,59 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
-  "rewrites": [
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "cd frontend && npm install && npm run build",
+        "distDir": "frontend/dist"
+      }
+    },
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/dist/$1"
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "https://ecommerce-api-git-main-glhfsox.vercel.app/api",
+    "VITE_STRIPE_PUBLIC_KEY": "pk_test_51RC2zX2a6Pp0pVsQdxh9yeppttxo2D45j4Dm34BjzXIHroCVq62PJgvaXNtTLXBMAaysUeUsisYJ3D96d5vCajKK00oR3ru2aK",
+    "NODE_ENV": "production",
+    "MONGODB_URI": "mongodb+srv://artemmorzh:uftIV6hfS8YNp7Wr@cluster1.9ayu6bj.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster1",
+    "JWT_SECRET": "your_secure_jwt_secret_here",
+    "STRIPE_SECRET_KEY": "51RC2zX2a6Pp0pVsQYW8pkB7tmFtpFPWJdMVaSVIlRK923vHrLkxhv8fAFZKxK8x98mbS3mNZECctsmDtFbG8sgML00UevJuD1J",
+    "STRIPE_WEBHOOK_SECRET": "whsec_qkrxzuOnBWwWoj2rWvaVQ7tFkkyjuppE"
+  },
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
     }
   ]
 } 

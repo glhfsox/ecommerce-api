@@ -46,3 +46,4 @@ coverage/
 # Production
 frontend/dist
 frontend/build 
+.vercel
