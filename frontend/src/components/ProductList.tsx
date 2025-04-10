@@ -11,26 +11,44 @@ const ProductList: React.FC = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const productsUrl = `${apiUrl}/products`;
+      console.log(`Attempting to fetch products from: ${productsUrl}`);
+
       try {
         setLoading(true);
-        const apiUrl = import.meta.env.VITE_API_URL;
-        console.log(`Fetching products from: ${apiUrl}/products`);
-        const response = await fetch(`${apiUrl}/products`);
+        setError(null); // Reset error before fetching
+        const response = await fetch(productsUrl);
+        console.log(`Fetch response status: ${response.status}`);
+
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          let errorBody = 'Unknown error';
+          try {
+            // Try to parse error response from backend
+            const errorData = await response.json();
+            errorBody = errorData.message || JSON.stringify(errorData);
+            console.error('Backend error response:', errorData);
+          } catch (parseError) {
+            // If parsing fails, use the status text
+            errorBody = response.statusText;
+            console.error('Could not parse error response, status text:', errorBody);
+          }
+          throw new Error(`HTTP error ${response.status}: ${errorBody}`);
         }
+
         const data = await response.json();
-        console.log('Fetched products:', data);
+        console.log('Successfully fetched data:', data);
+
         if (Array.isArray(data)) {
-            setProducts(data);
+          setProducts(data);
         } else {
-            console.error('Fetched data is not an array:', data);
-            setProducts([]); // Set to empty array if data is not as expected
-            setError('Unexpected data format received from server.');
+          console.error('Fetched data is not an array:', data);
+          setProducts([]);
+          setError('Unexpected data format received from server. Expected an array.');
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error('Failed to fetch products:', err);
-        setError(err instanceof Error ? err.message : 'An unknown error occurred');
+        setError(err.message || 'An unknown network error occurred');
       } finally {
         setLoading(false);
       }
@@ -68,23 +86,23 @@ const ProductList: React.FC = () => {
           <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardMedia
               component="img"
-              sx={{ height: 140 }}
-              image={product.image || 'https://via.placeholder.com/150'}
+              sx={{ aspectRatio: '1 / 1', objectFit: 'cover' }}
+              image={product.image || 'https://via.placeholder.com/300x300?text=Sneaker'}
               alt={product.name}
             />
             <CardContent sx={{ flexGrow: 1 }}>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h6" component="div">
                 {product.name}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
                 {product.description}
               </Typography>
-              <Typography variant="h6" sx={{ mt: 1 }}>
+              <Typography variant="h6" component="p">
                 ${product.price.toFixed(2)}
               </Typography>
             </CardContent>
-            <Box sx={{ p: 2, mt: 'auto' }}>
-              <Button size="small" variant="contained" onClick={() => handleAddToCart(product)}>
+            <Box sx={{ p: 2, pt: 0, mt: 'auto' }}>
+              <Button fullWidth size="medium" variant="contained" onClick={() => handleAddToCart(product)}>
                 Add to Cart
               </Button>
             </Box>
