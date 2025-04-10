@@ -5,11 +5,13 @@ const routes = require('./routes');
 
 const app = express();
 
+// Log the FRONTEND_URL environment variable for debugging CORS
+const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+console.log(`[CORS] Allowed Origin configured as: ${allowedOrigin}`);
+
 // Middleware
 app.use(cors({
-  // Allow requests from the frontend URL specified in the environment variables
-  // Fallback to localhost for development
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: allowedOrigin,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
