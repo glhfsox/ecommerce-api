@@ -1,19 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "cd frontend && npm install && npm run build",
-        "distDir": "frontend/dist"
-      }
-    },
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "framework": "vite",
+  "regions": ["iad1"],
   "routes": [
     {
       "src": "/api/(.*)",
