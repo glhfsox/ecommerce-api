@@ -1,18 +1,16 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
+  "framework": "vite",
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
   "routes": [
     {
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "VITE_API_URL": "https://ecommerce-api-backend.vercel.app/api",
+    "VITE_STRIPE_PUBLIC_KEY": "pk_test_51RC2zX2a6Pp0pVsQdxh9yeppttxo2D45j4Dm34BjzXIHroCVq62PJgvaXNtTLXBMAaysUeUsisYJ3D96d5vCajKK00oR3ru2aK"
+  }
 } 
