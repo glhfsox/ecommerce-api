@@ -12,13 +12,6 @@
       "dest": "server.js"
     }
   ],
-  "env": {
-    "NODE_ENV": "production",
-    "MONGODB_URI": "mongodb+srv://artemmorzh:uftIV6hfS8YNp7Wr@cluster1.9ayu6bj.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster1",
-    "JWT_SECRET": "your_secure_jwt_secret_here",
-    "STRIPE_SECRET_KEY": "51RC2zX2a6Pp0pVsQYW8pkB7tmFtpFPWJdMVaSVIlRK923vHrLkxhv8fAFZKxK8x98mbS3mNZECctsmDtFbG8sgML00UevJuD1J",
-    "STRIPE_WEBHOOK_SECRET": "whsec_qkrxzuOnBWwWoj2rWvaVQ7tFkkyjuppE"
-  },
   "headers": [
     {
       "source": "/(.*)",
